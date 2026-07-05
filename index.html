@@ -350,39 +350,38 @@ async function submitCase(){
   const platforms = Array.from(document.querySelectorAll(".f_platform:checked")).map(el=>el.value);
   const reportedEl = document.querySelector("input[name=f_reported]:checked");
 
-  const record = {
-    name, id_number,
-    prdp: document.getElementById("f_prdp").value.trim(),
-    contact,
-    platforms: platforms.join("; "),
-    vin: document.getElementById("f_vin").value.trim(),
-    region,
-    category,
-    description: desc,
-    incident_date: document.getElementById("f_date").value || null,
-    already_reported: reportedEl ? reportedEl.value : "",
-    consent_followup: document.getElementById("f_consent").checked
+  const payload = {
+    p_name: name,
+    p_id_number: id_number,
+    p_prdp: document.getElementById("f_prdp").value.trim(),
+    p_contact: contact,
+    p_platforms: platforms.join("; "),
+    p_vin: document.getElementById("f_vin").value.trim(),
+    p_region: region,
+    p_category: category,
+    p_description: desc,
+    p_incident_date: document.getElementById("f_date").value || null,
+    p_already_reported: reportedEl ? reportedEl.value : "",
+    p_consent_followup: document.getElementById("f_consent").checked
   };
 
   try{
-    const res = await fetch(SUPABASE_URL + "/rest/v1/driver_cases", {
+    const res = await fetch(SUPABASE_URL + "/rest/v1/rpc/submit_case", {
       method: "POST",
       headers: {
         "apikey": SUPABASE_ANON_KEY,
         "Authorization": "Bearer " + SUPABASE_ANON_KEY,
-        "Content-Type": "application/json",
-        "Prefer": "return=representation"
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(record)
+      body: JSON.stringify(payload)
     });
 
     if(!res.ok){
       throw new Error("Insert failed: " + res.status);
     }
 
-    const data = await res.json();
-    const caseNumber = (data && data[0] && data[0].case_number) ? data[0].case_number : "submitted";
-    renderSuccess(caseNumber);
+    const caseNumber = await res.json();
+    renderSuccess(caseNumber || "submitted");
   }catch(e){
     errBox.style.display = "block";
     errBox.textContent = "Something went wrong submitting your case. Please check your connection and try again.";
