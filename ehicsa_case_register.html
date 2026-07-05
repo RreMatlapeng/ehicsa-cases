@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EHICSA Case Register</title>
+<style>
+  :root{
+    --navy:#0F2A43;
+    --navy-deep:#081A2B;
+    --gold:#D9A441;
+    --gold-soft:#F0DDAE;
+    --paper:#F7F5EF;
+    --ink:#26313B;
+    --ink-soft:#5B6773;
+    --alert:#A8412F;
+    --line:#D9D2C2;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --serif: 'Spectral', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.5;
+  }
+  .wrap{
+    max-width:640px;
+    margin:0 auto;
+    padding:0 20px 60px;
+  }
+  header.top{
+    background:var(--navy);
+    color:var(--paper);
+    padding:28px 20px 24px;
+    border-bottom:4px solid var(--gold);
+  }
+  header.top .inner{
+    max-width:640px;
+    margin:0 auto;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    margin:0 0 6px;
+  }
+  h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:26px;
+    margin:0 0 8px;
+    letter-spacing:.01em;
+  }
+  .lead{
+    font-size:14.5px;
+    color:#D8DEE3;
+    margin:0;
+    max-width:50ch;
+  }
+  section.card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:2px;
+    margin-top:22px;
+    padding:22px 22px 26px;
+    position:relative;
+  }
+  section.card::before{
+    content:attr(data-tag);
+    position:absolute;
+    top:-11px;
+    left:20px;
+    background:var(--paper);
+    padding:0 8px;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.1em;
+    color:var(--ink-soft);
+  }
+  h2{
+    font-family:var(--serif);
+    font-size:18px;
+    font-weight:600;
+    margin:4px 0 4px;
+    color:var(--navy);
+  }
+  .section-note{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 18px;
+  }
+  label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin:16px 0 6px;
+    color:var(--ink);
+  }
+  label .opt{
+    font-weight:400;
+    color:var(--ink-soft);
+    font-size:12px;
+  }
+  input[type=text], input[type=tel], input[type=date], select, textarea{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    font-family:var(--sans);
+    font-size:14.5px;
+    background:#fdfcf9;
+    color:var(--ink);
+  }
+  input:focus, select:focus, textarea:focus{
+    outline:2px solid var(--gold);
+    outline-offset:1px;
+    border-color:var(--gold);
+  }
+  textarea{min-height:110px; resize:vertical;}
+  .checks{display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:4px;}
+  .checks label{
+    display:flex; align-items:center; gap:7px;
+    font-weight:400; margin:0; font-size:14px;
+  }
+  .checks input{width:auto;}
+  .radio-row{display:flex; gap:20px; margin-top:4px;}
+  .radio-row label{display:flex; align-items:center; gap:7px; font-weight:400; margin:0; font-size:14px;}
+  .radio-row input{width:auto;}
+  .card.report{border-top:3px solid var(--alert);}
+  .card.report::before{color:var(--alert);}
+  button.submit{
+    margin-top:26px;
+    width:100%;
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    padding:14px 18px;
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:.02em;
+    border-radius:2px;
+    cursor:pointer;
+  }
+  button.submit:hover{background:var(--navy-deep);}
+  button.submit:disabled{opacity:.5; cursor:default;}
+  .err{color:var(--alert); font-size:13px; margin-top:8px;}
+  footer.tiny{
+    text-align:center;
+    margin-top:34px;
+  }
+  footer.tiny a{
+    color:var(--ink-soft);
+    font-size:12px;
+    text-decoration:underline;
+    cursor:pointer;
+  }
+
+  /* success / stamp */
+  .stamp-screen{
+    text-align:center;
+    padding:60px 20px;
+  }
+  .stamp{
+    display:inline-block;
+    border:2px dashed var(--navy);
+    padding:22px 30px;
+    margin:24px 0;
+    transform:rotate(-1.5deg);
+  }
+  .stamp .num{
+    font-family:var(--mono);
+    font-size:26px;
+    font-weight:700;
+    color:var(--navy);
+    letter-spacing:.03em;
+  }
+  .stamp .label{
+    font-family:var(--mono);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    color:var(--ink-soft);
+    margin-top:6px;
+  }
+  .back-link{
+    display:inline-block;
+    margin-top:20px;
+    color:var(--navy);
+    font-weight:600;
+    cursor:pointer;
+    text-decoration:underline;
+  }
+
+  /* admin */
+  .admin-gate{
+    padding:60px 20px; text-align:center;
+  }
+  .admin-gate input{max-width:220px; margin:0 auto;}
+  .admin-gate button{margin-top:14px;}
+  table.admin-table{
+    width:100%; border-collapse:collapse; margin-top:16px; font-size:13px;
+  }
+  table.admin-table th, table.admin-table td{
+    border:1px solid var(--line); padding:8px; text-align:left; vertical-align:top;
+  }
+  table.admin-table th{background:var(--navy); color:#fff; font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em;}
+  .summary-row{display:flex; gap:14px; flex-wrap:wrap; margin:18px 0;}
+  .summary-chip{
+    background:var(--gold-soft); border:1px solid var(--gold);
+    padding:8px 12px; border-radius:2px; font-size:12.5px; font-family:var(--mono);
+  }
+  .toolbar{display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-top:14px;}
+  .toolbar button{
+    background:var(--navy); color:#fff; border:none; padding:9px 14px; font-size:13px; border-radius:2px; cursor:pointer;
+  }
+  .note-box{
+    background:#FDF6E9; border:1px solid var(--gold); padding:12px 14px; font-size:12.5px; color:var(--ink-soft); margin-top:16px; border-radius:2px;
+  }
+</style>
+</head>
+<body>
+
+<header class="top"><div class="inner">
+  <p class="eyebrow" id="topEyebrow">EHICSA &middot; Case Register</p>
+  <h1 id="topTitle">Driver &amp; Operator Case Register</h1>
+  <p class="lead" id="topLead">Tell us who you are and, if something unfair happened, log it here. Every entry gets a case reference so EHICSA can follow up.</p>
+</div></header>
+
+<div class="wrap">
+  <div id="app"></div>
+</div>
+
+<script>
+const SUPABASE_URL = "https://ugaxflrbghwezyaiihrg.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnYXhmbHJiZ2h3ZXp5YWlpaHJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyMTI2MzIsImV4cCI6MjA5ODc4ODYzMn0.WYO-ly4mo3OOFkt0Q8ffvbWyxO1fahN4Lw9pU6Atis0";
+
+const CATEGORIES = [
+  "Unfair deactivation or suspension",
+  "Fare or payment dispute",
+  "Harassment or abuse by platform (Bolt, Uber, InDrive, etc.)",
+  "Unfair treatment by taxi/meter operator",
+  "Safety incident",
+  "Other"
+];
+
+let view = "form";
+const app = document.getElementById("app");
+
+function esc(s){
+  return (s||"").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function renderForm(){
+  document.getElementById("topEyebrow").textContent = "EHICSA · Case Register";
+  document.getElementById("topTitle").textContent = "Driver & Operator Case Register";
+  document.getElementById("topLead").textContent = "Tell us who you are and, if something unfair happened, log it here. Every entry gets a case reference so EHICSA can follow up.";
+
+  app.innerHTML = `
+    <section class="card" data-tag="SECTION A">
+      <h2>Your Details</h2>
+      <p class="section-note">Used for EHICSA records only. No payment or subscription is required to submit this form.</p>
+
+      <label>Full name <span class="opt">required</span></label>
+      <input type="text" id="f_name">
+
+      <label>ID number <span class="opt">required</span></label>
+      <input type="text" id="f_id">
+
+      <label>PrDP number <span class="opt">if applicable</span></label>
+      <input type="text" id="f_prdp">
+
+      <label>Contact number <span class="opt">required</span></label>
+      <input type="tel" id="f_contact">
+
+      <label>Which platform(s) or operator do you work under? <span class="opt">select all that apply</span></label>
+      <div class="checks">
+        ${["Bolt","Uber","InDrive","Taxi / meter operator","Other"].map(p=>`
+          <label><input type="checkbox" class="f_platform" value="${p}"> ${p}</label>
+        `).join("")}
+      </div>
+
+      <label>Vehicle registration or VIN <span class="opt">optional</span></label>
+      <input type="text" id="f_vin">
+
+      <label>Region / rank <span class="opt">required</span></label>
+      <input type="text" id="f_region">
+    </section>
+
+    <section class="card report" data-tag="SECTION B">
+      <h2>Report a Case</h2>
+      <p class="section-note">Use this to record when a platform (like Bolt or Uber) or a taxi operator treated you unfairly. This becomes part of the official EHICSA case record.</p>
+
+      <label>Category <span class="opt">required</span></label>
+      <select id="f_category">
+        <option value="">Select a category…</option>
+        ${CATEGORIES.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("")}
+      </select>
+
+      <label>What happened? <span class="opt">required</span></label>
+      <textarea id="f_desc" placeholder="Describe the incident in your own words — dates, names, and what was said or done help EHICSA follow up."></textarea>
+
+      <label>Date it happened <span class="opt">optional</span></label>
+      <input type="date" id="f_date">
+
+      <label>Have you already reported this to the platform or operator?</label>
+      <div class="radio-row">
+        <label><input type="radio" name="f_reported" value="Yes"> Yes</label>
+        <label><input type="radio" name="f_reported" value="No"> No</label>
+      </div>
+
+      <label style="margin-top:18px;">
+        <span class="checks"><label style="font-weight:400;"><input type="checkbox" id="f_consent"> EHICSA may contact me about this case</label></span>
+      </label>
+
+      <div id="formErr" class="err" style="display:none;"></div>
+      <button class="submit" id="submitBtn">Submit case</button>
+    </section>
+  `;
+
+  document.getElementById("submitBtn").onclick = submitCase;
+}
+
+async function submitCase(){
+  const name = document.getElementById("f_name").value.trim();
+  const id_number = document.getElementById("f_id").value.trim();
+  const contact = document.getElementById("f_contact").value.trim();
+  const region = document.getElementById("f_region").value.trim();
+  const category = document.getElementById("f_category").value;
+  const desc = document.getElementById("f_desc").value.trim();
+  const errBox = document.getElementById("formErr");
+
+  if(!name || !id_number || !contact || !region || !category || !desc){
+    errBox.style.display = "block";
+    errBox.textContent = "Please fill in all required fields (marked required) before submitting.";
+    return;
+  }
+  errBox.style.display = "none";
+
+  const btn = document.getElementById("submitBtn");
+  btn.disabled = true;
+  btn.textContent = "Submitting…";
+
+  const platforms = Array.from(document.querySelectorAll(".f_platform:checked")).map(el=>el.value);
+  const reportedEl = document.querySelector("input[name=f_reported]:checked");
+
+  const record = {
+    name, id_number,
+    prdp: document.getElementById("f_prdp").value.trim(),
+    contact,
+    platforms: platforms.join("; "),
+    vin: document.getElementById("f_vin").value.trim(),
+    region,
+    category,
+    description: desc,
+    incident_date: document.getElementById("f_date").value || null,
+    already_reported: reportedEl ? reportedEl.value : "",
+    consent_followup: document.getElementById("f_consent").checked
+  };
+
+  try{
+    const res = await fetch(SUPABASE_URL + "/rest/v1/driver_cases", {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": "Bearer " + SUPABASE_ANON_KEY,
+        "Content-Type": "application/json",
+        "Prefer": "return=representation"
+      },
+      body: JSON.stringify(record)
+    });
+
+    if(!res.ok){
+      throw new Error("Insert failed: " + res.status);
+    }
+
+    const data = await res.json();
+    const caseNumber = (data && data[0] && data[0].case_number) ? data[0].case_number : "submitted";
+    renderSuccess(caseNumber);
+  }catch(e){
+    errBox.style.display = "block";
+    errBox.textContent = "Something went wrong submitting your case. Please check your connection and try again.";
+    btn.disabled = false;
+    btn.textContent = "Submit case";
+  }
+}
+
+function renderSuccess(caseNumber){
+  document.getElementById("topEyebrow").textContent = "EHICSA · Case Received";
+  document.getElementById("topTitle").textContent = "Thank you.";
+  document.getElementById("topLead").textContent = "Your case has been logged with EHICSA.";
+  app.innerHTML = `
+    <div class="stamp-screen">
+      <div class="stamp">
+        <div class="num">${esc(caseNumber)}</div>
+        <div class="label">Case Reference</div>
+      </div>
+      <p style="max-width:44ch; margin:0 auto; color:var(--ink-soft); font-size:14px;">
+        Keep this reference number. If you asked EHICSA to follow up, someone will contact you using the number you provided.
+      </p>
+      <div><span class="back-link" id="backLink">Submit another entry</span></div>
+    </div>
+  `;
+  document.getElementById("backLink").onclick = () => { view="form"; renderForm(); };
+}
+
+renderForm();
+</script>
+
+</body>
+</html>
