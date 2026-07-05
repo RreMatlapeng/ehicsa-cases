@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EHICSA Case Register</title>
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/favicon-180.png">
+
+<meta property="og:title" content="EHICSA Case Register">
+<meta property="og:description" content="Log your details and report unfair treatment by e-hailing platforms or taxi operators.">
+<meta property="og:image" content="https://ehicsa-cases.vercel.app/og_image.png">
+<meta property="og:url" content="https://ehicsa-cases.vercel.app/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
 <style>
   :root{
     --navy:#0F2A43;
@@ -41,7 +52,21 @@
   header.top .inner{
     max-width:640px;
     margin:0 auto;
+    display:flex;
+    align-items:center;
+    gap:16px;
   }
+  header.top .brand-icon{
+    flex-shrink:0;
+    width:56px;
+    height:56px;
+  }
+  header.top .brand-icon svg{
+    width:100%;
+    height:100%;
+    display:block;
+  }
+  header.top .brand-text{flex:1;}
   .eyebrow{
     font-family:var(--mono);
     font-size:11px;
@@ -228,9 +253,58 @@
 <body>
 
 <header class="top"><div class="inner">
+  <div class="brand-icon">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.5 379.5">
+<defs><style>
+  .cls-9,.cls-10,.cls-11{stroke-width:0px;}
+  .cls-9{fill:#102a43;}
+  .cls-10{fill:#010101;}
+  .cls-16{stroke-width:2.25px;}
+  .cls-16,.cls-17,.cls-18,.cls-19{fill:none;stroke:#d9a441;}
+  .cls-17{stroke-width:11px;}
+  .cls-15{font-family:SourceSerifRoman-Regular,'Source Serif Variable';font-variation-settings:'wght' 400;font-size:35.41px;}
+  .cls-15,.cls-11{fill:#d9a441;}
+  .cls-18{stroke-width:7.5px;}
+  .cls-19{stroke-linecap:round;stroke-width:6.75px;}
+</style></defs>
+<circle class="cls-9" cx="189.75" cy="189.27" r="186"/>
+<circle class="cls-18" cx="189.75" cy="189.75" r="186"/>
+<circle class="cls-16" cx="189.75" cy="189.75" r="141"/>
+<circle class="cls-17" cx="189.75" cy="189.75" r="84"/>
+<circle class="cls-11" cx="189.75" cy="189.75" r="13.5"/>
+<line class="cls-19" x1="189.75" y1="105.75" x2="189.75" y2="147.75"/>
+<line class="cls-19" x1="189.75" y1="231.75" x2="189.75" y2="273.75"/>
+<line class="cls-19" x1="105.75" y1="189.75" x2="147.75" y2="189.75"/>
+<line class="cls-19" x1="231.75" y1="189.75" x2="273.75" y2="189.75"/>
+<line class="cls-19" x1="129.75" y1="129.75" x2="159" y2="159"/>
+<line class="cls-19" x1="220.5" y1="220.5" x2="249.75" y2="249.75"/>
+<line class="cls-19" x1="249.75" y1="129.75" x2="220.5" y2="159"/>
+<line class="cls-19" x1="159" y1="220.5" x2="129.75" y2="249.75"/>
+<text class="cls-15" transform="translate(115.45 319.95) rotate(-146.15)"><tspan x="0" y="0">E</tspan></text>
+<text class="cls-15" transform="translate(82.88 295.22) rotate(-129.32)"><tspan x="0" y="0">H</tspan></text>
+<text class="cls-15" transform="translate(55.69 256.31) rotate(-113.92)"><tspan x="0" y="0">I</tspan></text>
+<text class="cls-15" transform="translate(44.33 226.33) rotate(-99.78)"><tspan x="0" y="0">C</tspan></text>
+<text class="cls-15" transform="translate(40.07 184.61) rotate(-84.63)"><tspan x="0" y="0">S</tspan></text>
+<text class="cls-15" transform="translate(45.69 147.95) rotate(-69.32)"><tspan x="0" y="0">A</tspan></text>
+<text class="cls-15" transform="translate(102.53 67.85) rotate(-31.55)"><tspan x="0" y="0">E</tspan></text>
+<text class="cls-15" transform="translate(138.53 48.56) rotate(-14.56)"><tspan x="0" y="0">H</tspan></text>
+<text class="cls-15" transform="translate(185.21 40.16) rotate(.93)"><tspan x="0" y="0">I</tspan></text>
+<text class="cls-15" transform="translate(217.26 42.35) rotate(14.81)"><tspan x="0" y="0">C</tspan></text>
+<text class="cls-15" transform="translate(256.96 55.87) rotate(30.18)"><tspan x="0" y="0">S</tspan></text>
+<text class="cls-15" transform="translate(287.87 76.35) rotate(45.37)"><tspan x="0" y="0">A</tspan></text>
+<text class="cls-15" transform="translate(336.94 161.39) rotate(83.25)"><tspan x="0" y="0">E</tspan></text>
+<text class="cls-15" transform="translate(339.38 202.2) rotate(100.03)"><tspan x="0" y="0">H</tspan></text>
+<text class="cls-15" transform="translate(327.56 248.15) rotate(115.52)"><tspan x="0" y="0">I</tspan></text>
+<text class="cls-15" transform="translate(312.17 276.29) rotate(129.56)"><tspan x="0" y="0">C</tspan></text>
+<text class="cls-15" transform="translate(283.28 306.73) rotate(144.77)"><tspan x="0" y="0">S</tspan></text>
+<text class="cls-15" transform="translate(251.8 326.31) rotate(160.05)"><tspan x="0" y="0">A</tspan></text>
+</svg>
+  </div>
+  <div class="brand-text">
   <p class="eyebrow" id="topEyebrow">EHICSA &middot; Case Register</p>
   <h1 id="topTitle">Driver &amp; Operator Case Register</h1>
   <p class="lead" id="topLead">Tell us who you are and, if something unfair happened, log it here. Every entry gets a case reference so EHICSA can follow up.</p>
+  </div>
 </div></header>
 
 <div class="wrap">
